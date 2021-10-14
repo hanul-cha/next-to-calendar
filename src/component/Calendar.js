@@ -53,6 +53,7 @@ export default function Calendar() {
     const prevDateNum = () => {
         setDate( dateNum - 1 );
     }
+
     const whatDay = (date) =>{
         const today = new Date();//노출된 달과 이번달이 다를수 있기때문에 다시선언
         if(viewMonth === today.getMonth() && viewYear === today.getFullYear()) {
@@ -62,6 +63,11 @@ export default function Calendar() {
         }
         return "this";
     }
+
+    const useTodo = () => {
+        
+    }
+    //서버에 있는 날자와 현재 선택된 날자의 정보가 일치하면 함수를 실행
     
     
 
@@ -92,7 +98,7 @@ export default function Calendar() {
                             : 'other';
                             
                             
-                            return <div className="date" key={i}><span className={condition}>{date}</span></div>
+                            return <div className="date" key={i} onClick={useTodo}><span className={condition}>{date}</span></div>
                         })}
                     </div>
                 </div> 
