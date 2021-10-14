@@ -3,12 +3,12 @@ import Link from "next/link";
 import { useState } from "react";
 
 
-export default function Calendar({num}) {
+export default function Calendar() {
     const [dateNum,setDate] = useState(0);
     const router = useRouter();
 
     let date = new Date();
-    date.setMonth(date.getMonth() + Number(num));
+    date.setMonth(date.getMonth() + Number(dateNum));
     
     
 
@@ -47,9 +47,13 @@ export default function Calendar({num}) {
 
 
     const nextDateNum = () => {
-        setDate( +1 );
-        router.push(`/tomorrow/${dateNum}}`)
-
+        setDate( dateNum + 1 );
+    }
+    const thisDateNum = () => {
+        setDate(0);
+    }
+    const prevDateNum = () => {
+        setDate( dateNum - 1 );
     }
     
     
@@ -59,8 +63,8 @@ export default function Calendar({num}) {
                 <div className="header">
                     <div className="year-month">{`${viewYear}년 ${viewMonth + 1}월`}</div>
                     <div className="nav">
-                        <button className="nav-btn go-prev" >&lt;</button>
-                        <button className="nav-btn go-today" >TODAY</button>
+                        <button className="nav-btn go-prev" onClick={prevDateNum}>&lt;</button>
+                        <button className="nav-btn go-today" onClick={thisDateNum}>TODAY</button>
                         <button className="nav-btn go-next" onClick={nextDateNum}>&gt;</button>
                     </div>
                 </div>

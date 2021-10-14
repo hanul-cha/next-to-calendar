@@ -12,7 +12,7 @@ export default function Home() {
         <link rel="icon" href="/favicon.ico" />
       </Head>
 
-      <Calendar num="0" />
+      <Calendar />
     </div>
   )
 }
