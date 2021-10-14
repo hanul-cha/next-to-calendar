@@ -1,5 +1,11 @@
+import { useRouter } from "next/dist/client/router";
+import Link from "next/link";
+import { useState } from "react";
+
 
 export default function Calendar({num}) {
+    const [dateNum,setDate] = useState(0);
+    const router = useRouter();
 
     let date = new Date();
     date.setMonth(date.getMonth() + Number(num));
@@ -38,10 +44,14 @@ export default function Calendar({num}) {
 
     const firstDateIndex = dates.indexOf(1);
     const lastDateIndex = dates.lastIndexOf(TLDate);
-    console.log(dates)
-    console.log(firstDateIndex)
+
+
+    const nextDateNum = () => {
+        setDate( +1 );
+        router.push(`/tomorrow/${dateNum}}`)
+
+    }
     
-    console.log(lastDateIndex)
     
 
     return(
@@ -51,7 +61,7 @@ export default function Calendar({num}) {
                     <div className="nav">
                         <button className="nav-btn go-prev" >&lt;</button>
                         <button className="nav-btn go-today" >TODAY</button>
-                        <button className="nav-btn go-next" >&gt;</button>
+                        <button className="nav-btn go-next" onClick={nextDateNum}>&gt;</button>
                     </div>
                 </div>
                 <div className="main">
@@ -69,8 +79,7 @@ export default function Calendar({num}) {
                             const condition = i >= firstDateIndex && i < lastDateIndex + 1
                             ? 'this'
                             : 'other';
-                            console.log(date);
-                            console.log(i);
+                            
                             return <div className="date" key={i}><span className={condition}>{date}</span></div>
                         })}
                     </div>
