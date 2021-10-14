@@ -1,11 +1,9 @@
 import { useRouter } from "next/dist/client/router";
-import Link from "next/link";
 import { useState } from "react";
 
 
 export default function Calendar() {
     const [dateNum,setDate] = useState(0);
-    const router = useRouter();
 
     let date = new Date();
     date.setMonth(date.getMonth() + Number(dateNum));
@@ -55,6 +53,15 @@ export default function Calendar() {
     const prevDateNum = () => {
         setDate( dateNum - 1 );
     }
+    const whatDay = (date) =>{
+        const today = new Date();//노출된 달과 이번달이 다를수 있기때문에 다시선언
+        if(viewMonth === today.getMonth() && viewYear === today.getFullYear()) {
+            if(date === today.getDate()) {
+                return "today this";
+            }
+        }
+        return "this";
+    }
     
     
 
@@ -81,8 +88,9 @@ export default function Calendar() {
                     <div className="dates">
                         {dates.map((date, i) => {
                             const condition = i >= firstDateIndex && i < lastDateIndex + 1
-                            ? 'this'
+                            ? whatDay(date)
                             : 'other';
+                            
                             
                             return <div className="date" key={i}><span className={condition}>{date}</span></div>
                         })}
