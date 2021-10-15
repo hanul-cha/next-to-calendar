@@ -1,5 +1,6 @@
 import { useRouter } from "next/dist/client/router";
 import { useState } from "react";
+import useFetch from "../hooks/useFetch";
 
 
 export default function Calendar() {
@@ -72,7 +73,9 @@ export default function Calendar() {
     //사이드에 todolist를 노출시킴
     //배열 형태로 있는것과 / json서버로 받는거 두게 버전을 만들것임
     
-    
+    const dbList = useFetch(`http://localhost:5000/api/toDoList`)
+
+    console.log(dbList);
 
     return(
         <div className="calendar">
