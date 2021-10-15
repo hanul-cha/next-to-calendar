@@ -4,6 +4,7 @@ import { useState } from "react";
 
 export default function Calendar() {
     const [dateNum,setDate] = useState(0);
+    const [liDate,setLi] = useState(0);
 
     let date = new Date();
     date.setMonth(date.getMonth() + Number(dateNum));
@@ -64,10 +65,12 @@ export default function Calendar() {
         return "this";
     }
 
-    const useTodo = () => {
-        
+    const useTodo = (e) => {
+        console.log(e.target.children[0].innerText)
     }
     //서버에 있는 날자와 현재 선택된 날자의 정보가 일치하면 함수를 실행
+    //사이드에 todolist를 노출시킴
+    //배열 형태로 있는것과 / json서버로 받는거 두게 버전을 만들것임
     
     
 
@@ -98,7 +101,15 @@ export default function Calendar() {
                             : 'other';
                             
                             
-                            return <div className="date" key={i} onClick={useTodo}><span className={condition}>{date}</span></div>
+                            return (
+                                <div className="date" key={i} onClick={useTodo}>
+                                    <span className={condition}>
+                                        {date}
+                                    </span>
+                                    <div className="liDate"></div>
+                                </div>
+                            ) 
+                            
                         })}
                     </div>
                 </div> 
