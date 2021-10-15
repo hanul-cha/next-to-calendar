@@ -5,7 +5,7 @@ import useFetch from "../hooks/useFetch";
 
 export default function Calendar() {
     const [dateNum,setDate] = useState(0);
-    const [liDate,setLi] = useState(0);
+    const [liDate,setLi] = useState();
 
     let date = new Date();
     date.setMonth(date.getMonth() + Number(dateNum));
@@ -66,6 +66,7 @@ export default function Calendar() {
         return "this";
     }
 
+
     const useTodo = (e) => {
         console.log(e.target.children[0].innerText)
     }
@@ -75,7 +76,20 @@ export default function Calendar() {
     
     const dbList = useFetch(`http://localhost:5000/api/toDoList`)
 
-    console.log(dbList);
+    const getList = (date) => {
+        let toDoList;
+        dbList.map( item => {
+            if(item.year === viewYear && item.month === viewMonth + 1) {
+                if(item.day === date) {
+                    toDoList = item
+                }
+            }
+        } )/* map */
+        return toDoList;
+    }
+    
+
+
 
     return(
         <div className="calendar">
@@ -102,14 +116,20 @@ export default function Calendar() {
                             const condition = i >= firstDateIndex && i < lastDateIndex + 1
                             ? whatDay(date)
                             : 'other';
+
                             
+                            const listText = getList(date);
                             
                             return (
                                 <div className="date" key={i} onClick={useTodo}>
                                     <span className={condition}>
                                         {date}
                                     </span>
-                                    <div className="liDate"></div>
+                                    <div className="liDate">
+                                        <h4>
+                                            {listText ? listText.list.title : ""}
+                                        </h4>
+                                    </div>
                                 </div>
                             ) 
                             
