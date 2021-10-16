@@ -1,11 +1,11 @@
 import { useRouter } from "next/dist/client/router";
 import { useState } from "react";
 import useFetch from "../hooks/useFetch";
+import getList from "../modules/getList";
 
 
 export default function Calendar() {
     const [dateNum,setDate] = useState(0);
-    const [liDate,setLi] = useState();
 
     let date = new Date();
     date.setMonth(date.getMonth() + Number(dateNum));
@@ -66,27 +66,14 @@ export default function Calendar() {
         return "this";
     }
 
-
     const useTodo = (e) => {
-        console.log(e.target.children[0].innerText)
+        console.log(e.target.nextSibling.innerText)
     }
     //서버에 있는 날자와 현재 선택된 날자의 정보가 일치하면 함수를 실행
     //사이드에 todolist를 노출시킴
     //배열 형태로 있는것과 / json서버로 받는거 두게 버전을 만들것임
     
-    const dbList = useFetch(`http://localhost:5000/api/toDoList`)
-
-    const getList = (date) => {
-        let toDoList;
-        dbList.map( item => {
-            if(item.year === viewYear && item.month === viewMonth + 1) {
-                if(item.day === date) {
-                    toDoList = item
-                }
-            }
-        } )/* map */
-        return toDoList;
-    }
+    
     
 
 
@@ -118,10 +105,11 @@ export default function Calendar() {
                             : 'other';
 
                             
-                            const listText = getList(date);
+                            const listText = getList(date, viewYear, viewMonth);
                             
                             return (
                                 <div className="date" key={i} onClick={useTodo}>
+                                    <div className="dateBack"></div>
                                     <span className={condition}>
                                         {date}
                                     </span>
