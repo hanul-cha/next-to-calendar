@@ -1,11 +1,13 @@
 import { useRouter } from "next/dist/client/router";
 import { useState } from "react";
 import useFetch from "../hooks/useFetch";
-import getList from "../modules/getList";
+
 
 
 export default function Calendar() {
     const [dateNum,setDate] = useState(0);
+    const [useList,setList] = useState(0);
+ 
 
     let date = new Date();
     date.setMonth(date.getMonth() + Number(dateNum));
@@ -74,9 +76,21 @@ export default function Calendar() {
     //배열 형태로 있는것과 / json서버로 받는거 두게 버전을 만들것임
     
     
+    const dbList = useFetch(`http://localhost:5000/api/toDoList`)
+
+    const getList = (date) => {
+        let toDoList;
+        dbList.map( item => {
+            if(item.year === viewYear && item.month === viewMonth + 1) {
+                if(item.day === date) {
+                    toDoList = item
+                }
+            }
+        } )/* map */
+        return toDoList;
+    }
+
     
-
-
 
     return(
         <div className="calendar">
@@ -103,9 +117,10 @@ export default function Calendar() {
                             const condition = i >= firstDateIndex && i < lastDateIndex + 1
                             ? whatDay(date)
                             : 'other';
-
                             
-                            const listText = getList(date, viewYear, viewMonth);
+                            
+                            const listText = getList(date);
+                            
                             
                             return (
                                 <div className="date" key={i} onClick={useTodo}>
