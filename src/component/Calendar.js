@@ -1,12 +1,13 @@
 import { useRouter } from "next/dist/client/router";
 import { useState } from "react";
 import useFetch from "../hooks/useFetch";
+import Side from "./Side";
 
 
 
 export default function Calendar() {
     const [dateNum,setDate] = useState(0);
-    const [useList,setList] = useState(0);
+    const [getSide,setSideNum] = useState(0);
  
 
     let date = new Date();
@@ -68,9 +69,6 @@ export default function Calendar() {
         return "this";
     }
 
-    const useTodo = (e) => {
-        console.log(e.target.nextSibling.innerText)
-    }
     //서버에 있는 날자와 현재 선택된 날자의 정보가 일치하면 함수를 실행
     //사이드에 todolist를 노출시킴
     //배열 형태로 있는것과 / json서버로 받는거 두게 버전을 만들것임
@@ -89,10 +87,15 @@ export default function Calendar() {
         } )/* map */
         return toDoList;
     }
+    
+    const useTodo = (e) => {
+        console.log(e.target.nextSibling.innerText)
+    }
 
     
 
     return(
+        <>
         <div className="calendar">
                 <div className="header">
                     <div className="year-month">{`${viewYear}년 ${viewMonth + 1}월`}</div>
@@ -139,6 +142,8 @@ export default function Calendar() {
                         })}
                     </div>
                 </div> 
-            </div>
+        </div>
+        <Side />
+        </>
     )
 }
