@@ -1,5 +1,5 @@
 import { useRouter } from "next/dist/client/router";
-import { useState } from "react";
+import { useRef, useState } from "react";
 import useFetch from "../hooks/useFetch";
 import Side from "./Side";
 
@@ -7,8 +7,7 @@ import Side from "./Side";
 
 export default function Calendar() {
     const [dateNum,setDate] = useState(0);
-    const [getSide,setSideNum] = useState(0);
- 
+    const [sideList,setSideList] = useState();
 
     let date = new Date();
     date.setMonth(date.getMonth() + Number(dateNum));
@@ -89,8 +88,13 @@ export default function Calendar() {
     }
     
     const useTodo = (e) => {
-        console.log(e.target.nextSibling.innerText)
+        const targetList = e.target.nextSibling.innerText
+        const clickList = getList(Number(targetList));
+        setSideList(clickList)
+        console.log(clickList)
     }
+    //클릭이벤트는 잘 작동됨
+    
 
     
 
@@ -143,7 +147,7 @@ export default function Calendar() {
                     </div>
                 </div> 
         </div>
-        <Side />
+        <Side list={sideList} />
         </>
     )
 }
