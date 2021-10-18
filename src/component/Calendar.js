@@ -6,8 +6,13 @@ import Side from "./Side";
 
 
 export default function Calendar() {
+    const exArray = {
+        "title":"제목이 없습니다.",
+        "text" : "오늘 할일이 없습니다."
+    }
+
     const [dateNum,setDate] = useState(0);
-    const [sideList,setSideList] = useState();
+    const [sideList,setSideList] = useState(exArray);
 
     let date = new Date();
     date.setMonth(date.getMonth() + Number(dateNum));
@@ -90,8 +95,12 @@ export default function Calendar() {
     const useTodo = (e) => {
         const targetList = e.target.nextSibling.innerText
         const clickList = getList(Number(targetList));
-        setSideList(clickList)
-        console.log(clickList)
+        if(clickList) {
+            setSideList(clickList.list);
+        } else {
+            setSideList(exArray)
+        }
+        
     }
     //클릭이벤트는 잘 작동됨
     
