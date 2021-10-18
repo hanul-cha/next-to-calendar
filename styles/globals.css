@@ -123,3 +123,24 @@ color: #396EE2;
   transform: translate(-50%, -50%);
   content: '';
 }
+
+.sideInner{
+  padding: 50px;
+  border: 1px solid #333333;
+  position: relative;
+}
+
+.side h2, .side p{
+  text-align: center;
+}
+
+.toDoBtn{
+  position: absolute;
+  bottom: 50px;
+  left: 50%;
+  transform: translateX(-50%);
+  width: 100px;
+  height: 40px;
+  border: none;
+  cursor: pointer;
+}
