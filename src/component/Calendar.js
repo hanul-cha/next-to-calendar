@@ -7,8 +7,13 @@ import Side from "./Side";
 
 export default function Calendar() {
     const exArray = {
-        "title":"제목이 없습니다.",
-        "text" : "오늘 할일이 없습니다."
+        "day":0,
+        "year":0,
+        "month":0,
+        "list":{
+            "title":"제목이 없습니다.",
+            "text" : "오늘 할일이 없습니다."
+        }
     }
 
     const [dateNum,setDate] = useState(0);
@@ -81,12 +86,13 @@ export default function Calendar() {
     const dbList = useFetch(`http://localhost:5000/api/toDoList`)
 
     const getList = (date) => {
-        let toDoList;
+        let toDoList
         dbList.map( item => {
             if(item.year === viewYear && item.month === viewMonth + 1) {
                 if(item.day === date) {
                     toDoList = item
                 }
+                
             }
         } )/* map */
         return toDoList;
@@ -96,9 +102,19 @@ export default function Calendar() {
         const targetList = e.target.nextSibling.innerText
         const clickList = getList(Number(targetList));
         if(clickList) {
-            setSideList(clickList.list);
+            setSideList(clickList);
         } else {
-            setSideList(exArray)
+            setSideList(
+                {
+                    "year":viewYear,
+                    "month":viewMonth + 1,
+                    "day":targetList,
+                    "list":{
+                        "title":"제목이 없습니다.",
+                        "text" : "오늘 할일이 없습니다."
+                    }
+                }
+            )
         }
         
     }
@@ -136,7 +152,6 @@ export default function Calendar() {
                             
                             
                             const listText = getList(date);
-                            
                             
                             return (
                                 <div className="date" key={i} onClick={useTodo}>

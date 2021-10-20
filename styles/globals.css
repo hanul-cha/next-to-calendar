@@ -124,7 +124,7 @@ color: #396EE2;
   content: '';
 }
 
-.sideInner{
+.sideInner, .toDoInner{
   padding: 50px;
   border: 1px solid #333333;
   position: relative;
@@ -134,7 +134,7 @@ color: #396EE2;
   text-align: center;
 }
 
-.toDoBtn{
+.toDoBtn, .addBtn{
   position: absolute;
   bottom: 50px;
   left: 50%;
