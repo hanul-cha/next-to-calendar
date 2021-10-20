@@ -26,6 +26,8 @@ app.post("/api/toDoList", (req, res) => {
     fs.readFile("./src/config/toDoList.json", (err, data) => {
         if(err) throw err;
         const dbList = JSON.parse(data);
+        dbList.push(setList)
+        console.log(dbList);
         fs.writeFile("./src/config/toDoList.json", JSON.stringify(dbList), (err) => {
             if(err) throw err;
         });

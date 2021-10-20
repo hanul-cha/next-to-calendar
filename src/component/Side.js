@@ -22,7 +22,7 @@ export default function Side(fullList) {
             body: JSON.stringify({
                 year: fullList.list.year,
                 month: fullList.list.month,
-                day: fullList.list.day,
+                day: Number(fullList.list.day),
                 list:{
                     title: e.target[0].value,
                     text: e.target[1].value
@@ -31,7 +31,9 @@ export default function Side(fullList) {
         })
         .then((res) => res.json())
         .then((res) => {
-            console.log(res)
+            if(res === "ok") {
+                setSide(false)
+            }
         })
 
         /* setSide(false) */
