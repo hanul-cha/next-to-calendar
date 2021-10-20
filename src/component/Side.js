@@ -1,8 +1,9 @@
+import { useRouter } from "next/dist/client/router"
 import { useState } from "react"
 
 export default function Side(fullList) {
     const [sideState, setSide] = useState(false)
-
+    const router = useRouter();
 
     const list = fullList.list.list
     
@@ -33,6 +34,7 @@ export default function Side(fullList) {
         .then((res) => {
             if(res === "ok") {
                 setSide(false)
+                window.location.replace("/")//새로고침해서 서버를 다시 키는걸로 타협함
             }
         })
 
