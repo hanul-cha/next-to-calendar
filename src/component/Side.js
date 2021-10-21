@@ -33,8 +33,8 @@ export default function Side(fullList) {
         .then((res) => res.json())
         .then((res) => {
             if(res === "ok") {
-                setSide(false)
-                window.location.replace("/")//새로고침해서 서버를 다시 키는걸로 타협함
+                setSide(false);
+                window.location.replace("/");//새로고침해서 서버를 다시 키는걸로 타협함
             }
         })
 
