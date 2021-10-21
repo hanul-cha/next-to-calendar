@@ -1,44 +1,19 @@
-import { useRouter } from "next/dist/client/router"
 import { useState } from "react"
 
 export default function Side(fullList) {
     const [sideState, setSide] = useState(false)
-    const router = useRouter();
 
     const list = fullList.list.list
     
 
     const changeAdd = () => {
-        setSide(true)
+        setSide(true);
     }
     
     const onSubmit = (e) => {
         e.preventDefault();
-        console.log(fullList.list.month)
-        fetch("http://localhost:5000/api/toDoList", {
-            method: "POST",
-            headers: {
-                "Content-Type": "application/json",
-            },
-            body: JSON.stringify({
-                year: fullList.list.year,
-                month: fullList.list.month,
-                day: Number(fullList.list.day),
-                list:{
-                    title: e.target[0].value,
-                    text: e.target[1].value
-                }
-            }),
-        })
-        .then((res) => res.json())
-        .then((res) => {
-            if(res === "ok") {
-                setSide(false);
-                window.location.replace("/");//새로고침해서 서버를 다시 키는걸로 타협함
-            }
-        })
 
-        /* setSide(false) */
+        setSide(false)
     }
     
 

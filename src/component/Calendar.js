@@ -81,9 +81,40 @@ export default function Calendar() {
     //서버에 있는 날자와 현재 선택된 날자의 정보가 일치하면 함수를 실행
     //사이드에 todolist를 노출시킴
     //배열 형태로 있는것과 / json서버로 받는거 두게 버전을 만들것임
+
+    const dbList = [
+        {
+            "id": 1,
+            "year": 2021,
+            "month": 10,
+            "day": 20,
+            "list": {
+                "title": "08시 기상",
+                "text": "9시에 스터디있음"
+            }
+        },
+        {
+            "id": 2,
+            "year": 2021,
+            "month": 11,
+            "day": 18,
+            "list": {
+                "title": "09시에 밥먹기",
+                "text": "1일1식"
+            }
+        },
+        {
+            "year": 2021,
+            "month": 10,
+            "day": 21,
+            "list": {
+                "title": "스터디 있음",
+                "text": "12시일걸??"
+            }
+        }
+    ]
     
     
-    const dbList = useFetch(`http://localhost:5000/api/toDoList`)
 
     const getList = (date) => {
         let toDoList
