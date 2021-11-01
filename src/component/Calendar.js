@@ -18,6 +18,8 @@ export default function Calendar() {
 
     const [dateNum,setDate] = useState(0);
     const [sideList,setSideList] = useState(exArray);
+    const [sideBoolean,setSideBoolean] = useState(true)
+    
 
     let date = new Date();
     date.setMonth(date.getMonth() + Number(dateNum));
@@ -101,6 +103,9 @@ export default function Calendar() {
     const useTodo = (e) => {
         const targetList = e.target.nextSibling.innerText
         const clickList = getList(Number(targetList));
+
+        setSideBoolean(false);
+
         if(clickList) {
             setSideList(clickList);
         } else {
@@ -171,7 +176,7 @@ export default function Calendar() {
                     </div>
                 </div> 
         </div>
-        <Side list={sideList} />
+        <Side list={sideList} bool={sideBoolean} />
         </>
     )
 }
@@ -185,4 +190,12 @@ export default function Calendar() {
 2. 당일날에 일정이 있으면 바로 일정이 노출되게 해야함
 
 ++ 3. 여유가 있다면 list를 두게 이상으로 받을수 있게 수정
+
+4. fetch완료되고 새로고침말고 다시 렌딩되게 바구기
+*/
+
+
+
+/* 
+묘듈 나누기 완료
 */

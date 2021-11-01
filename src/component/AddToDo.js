@@ -1,13 +1,12 @@
 export default function AddToDo(prop) {
-    console.log(prop)
 
-    const setSide = prop.setSide
+    const setSide = prop.setSide;
 
-    const fullList = prop.fullList
+    const fullList = prop.fullList;
 
     const onSubmit = (e) => {
         e.preventDefault();
-        console.log(fullList.list.month)
+
         fetch("http://localhost:5000/api/toDoList", {
             method: "POST",
             headers: {
@@ -31,7 +30,7 @@ export default function AddToDo(prop) {
             }
         })
 
-        /* setSide(false) */
+
     }
 
     return(

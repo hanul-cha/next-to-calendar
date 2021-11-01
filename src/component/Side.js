@@ -1,10 +1,19 @@
 import { useRouter } from "next/dist/client/router"
-import { useState } from "react"
+import { useEffect, useState } from "react"
 import AddToDo from "./AddToDo";
 
 export default function Side(fullList) {
     const [sideState, setSide] = useState(true)
     const router = useRouter();
+
+    useEffect(() => {
+        setSide(fullList.bool)
+    }, [fullList.bool]);
+
+    
+
+
+    //useEffect쓰면 될거같은데...안됨
 
     const list = fullList.list.list
     
@@ -18,16 +27,16 @@ export default function Side(fullList) {
     return (
         <>
             {sideState
-            ? 
-            <div className="side" style={{ width:300, height:603, paddingTop: 102, display:"block"}}>
-                <div className="sideInner" style={{width: 300, height: 500}}>
-                    <h2>{list.title}</h2>
-                    <p>{list.text}</p>
-                    <button className="toDoBtn" onClick={changeAdd}>일정추가</button>
+                ? 
+                <div className="side" style={{ width:300, height:603, paddingTop: 102, display:"block"}}>
+                    <div className="sideInner" style={{width: 300, height: 500}}>
+                        <h2>{list.title}</h2>
+                        <p>{list.text}</p>
+                        <button className="toDoBtn" onClick={changeAdd}>일정추가</button>
+                    </div>
                 </div>
-            </div>
-            :
-            <AddToDo fullList={fullList} setSide={setSide} />
+                :
+                <AddToDo fullList={fullList} setSide={setSide} />
             }
         </>
     )
